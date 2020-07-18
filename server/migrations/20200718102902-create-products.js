@@ -14,9 +14,6 @@ module.exports = {
       category: {
         type: Sequelize.STRING
       },
-      colors: {
-        type: Sequelize.JSON
-      },
       rate: {
         type: Sequelize.INTEGER
       },
@@ -33,7 +30,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       image: {
-        type: Sequelize.STRING
+        type: Sequelize.ARRAY(Sequelize.STRING)
       },
       testimonials: {
         type: Sequelize.JSON
@@ -41,11 +38,8 @@ module.exports = {
       vote: {
         type: Sequelize.INTEGER
       },
-      stock: {
+      sold: {
         type: Sequelize.INTEGER
-      },
-      capacities: {
-        type: Sequelize.JSON
       },
       createdAt: {
         allowNull: false,
