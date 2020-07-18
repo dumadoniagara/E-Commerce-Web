@@ -64,4 +64,14 @@ router.get('/:id', (req, res) => {
     })
 })
 
+/* Buy a products */
+router.put('/buy/:id', (req, res) => {
+  const {color, capacity, quantity} = req.body;
+  models.Products.findOne({
+    where:{
+      id : req.params.id
+    }
+  })
+})
+
 module.exports = router;
