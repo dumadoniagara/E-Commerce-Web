@@ -1,20 +1,24 @@
 import React from 'react';
 import Navbar from './components/Navbar';
-import Carousel from './components/Carousel';
-import ListProduct from './containers/ListProduct';
+import { BrowserRouter, Route } from 'react-router-dom'
 import './styles/app-style.css';
+import Home from './components/Home';
+import AddAds from './containers/AddAds';
 
 function App() {
   return (
-    <div className="App">
-      <header>
-        <Navbar />
-      </header>
-      <main>
-        <Carousel />
-        <ListProduct />
-      </main>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <header>
+          <Navbar />
+        </header>
+        <main>
+          <Route exact path='/' component={Home} />
+          <Route path='/add' component={AddAds} />
+
+        </main>
+      </div>
+    </BrowserRouter>
   );
 }
 

@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { NavLink, Link } from 'react-router-dom';
 
 const Navbar = (props) => {
    return (
       <div>
          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 ">
-            <a href="/" class="navbar-brand">SabarSubur Market</a>
+            <Link to="/" class="navbar-brand">SabarSubur Market</Link>
             <button
                class="navbar-toggler"
                type="button"
@@ -20,27 +21,27 @@ const Navbar = (props) => {
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                   <li class="nav-item">
-                     <a href="/home" class="nav-link">Home</a>
+                     <Link to="/" class="nav-link">Home</Link>
                   </li>
                   <li class="nav-item">
-                     <a href="/data" class="nav-link">Category</a>
+                     <Link to="/category" class="nav-link">Category</Link>
                   </li>
                   <li class="nav-item">
-                     <a href="/datedata" class="nav-link">New Add</a>
+                     <Link to="/add" class="nav-link">New Add</Link>
                   </li>
                   <li class="nav-item">
-                     <a href="/maps" class="nav-link">Transaction</a>
+                     <Link to="/transaction" class="nav-link">Transaction</Link>
                   </li>
                </ul>
                <form class="form-inline my-2 my-lg-0 mr-5">
                   <input class="form-control mr-sm-2" type="search" placeholder="Search product..." aria-label="Search" />
                   <button class="btn btn-outline-info my-2 my-sm-0" type="submit"><i className="fas fa-search"></i></button>
                </form>
-               <a href="/logout">
+               <Link to="/login">
                   <button
                      class="btn btn-outline-info my-2 my-sm-0 mr-5 logout-btn"
                   >Login</button>
-               </a>
+               </Link>
             </div>
          </nav>
       </div >
