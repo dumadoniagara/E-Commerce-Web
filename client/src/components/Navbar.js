@@ -3,7 +3,7 @@ import React from 'react'
 const Navbar = (props) => {
    return (
       <div>
-         <nav class="navbar navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 ">
+         <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 ">
             <a href="/" class="navbar-brand">SabarSubur Market</a>
             <button
                class="navbar-toggler"
