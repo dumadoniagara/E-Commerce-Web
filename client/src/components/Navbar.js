@@ -5,7 +5,7 @@ const Navbar = (props) => {
    return (
       <div>
          <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light shadow p-3 mb-5 ">
-            <Link to="/" class="navbar-brand">SabarSubur Market</Link>
+            <NavLink to="/" class="navbar-brand">SabarSubur Market</NavLink>
             <button
                class="navbar-toggler"
                type="button"
@@ -21,7 +21,7 @@ const Navbar = (props) => {
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                   <li class="nav-item">
-                     <Link to="/" class="nav-link">Home</Link>
+                     <NavLink to="/" class="nav-link">Home</NavLink>
                   </li>
                   <li class="nav-item">
                      <Link to="/category" class="nav-link">Category</Link>
