@@ -26,7 +26,7 @@ const Navbar = (props) => {
                      <a href="/data" class="nav-link">Category</a>
                   </li>
                   <li class="nav-item">
-                     <a href="/datedata" class="nav-link">All Products</a>
+                     <a href="/datedata" class="nav-link">New Add</a>
                   </li>
                   <li class="nav-item">
                      <a href="/maps" class="nav-link">Transaction</a>
