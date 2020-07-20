@@ -3,5 +3,5 @@ import product from './product';
 import detail from './detail';
 
 export default combineReducers({
-   product, detail
+   product
 })

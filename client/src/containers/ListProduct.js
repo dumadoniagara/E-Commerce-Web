@@ -4,19 +4,28 @@ import { loadProduct } from '../actions/index';
 import { connect } from 'react-redux';
 
 class ListProduct extends Component {
-   constructor(props) {
-      super(props)
-   }
-
    componentDidMount() {
       this.props.loadProduct();
    }
 
    render() {
+      const nodes = this.props.product.map((item, index) => {
+         return <CardProduct
+            key={index}
+            id={item.id}
+            title={item.title}
+            description={item.description}
+            price={item.price}
+            brand={item.brand}
+            detailProduct={item.detail_product}
+            image={item.image}
+            vote={item.vote}
+         />
+      })
       return (
          <div className="container">
             <div className="row">
-               {[...Array(10)].map((x, i) => <CardProduct key={i} />)}
+               {nodes}
             </div>
          </div>
       )
