@@ -13,7 +13,7 @@ class AddAds extends Component {
          brand: '',
          detailProduct: '',
          category: '',
-         file: null
+         file: ''
       }
    }
 
@@ -23,6 +23,7 @@ class AddAds extends Component {
 
    handleFileUpload = (event) => {
       this.setState({ file: event.target.files[0] })
+      console.log(event.target.files[0])
    }
 
    handleSubmit = (event) => {
@@ -215,10 +216,9 @@ class AddAds extends Component {
                                     className="custom-file-input"
                                     type="file"
                                     name="file"
-                                    value={this.state.file}
                                     onChange={this.handleFileUpload}
                                  />
-                                 <label className="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                 <label className="custom-file-label" >Choose file</label>
                               </div>
                            </div>
                         </div>
