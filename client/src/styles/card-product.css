@@ -3,6 +3,11 @@
    height: 17rem;
 }
 
+.image{
+   width : 50px;
+   height: 50px;
+}
+
 .product-item{
    display: inline-block;
 }

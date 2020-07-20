@@ -103,7 +103,7 @@ class AddAds extends Component {
                                  <option className="form-control" value="2">2</option>
                                  <option className="form-control" value="3">3</option>
                                  <option className="form-control" value="4">4</option>
-                                 <option className="form-control" value="4">5</option>
+                                 <option className="form-control" value="5">5</option>
                               </select>
                            </div>
                         </div>
@@ -217,6 +217,7 @@ class AddAds extends Component {
                                     type="file"
                                     name="file"
                                     onChange={this.handleFileUpload}
+                                    required={true}
                                  />
                                  <label className="custom-file-label" >Choose file</label>
                               </div>

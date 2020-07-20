@@ -6,7 +6,7 @@ export default function CardProduct(props) {
    return (
       <div className="col mb-4">
          <div className="card p-2 h-100">
-            <img src="https://images.unsplash.com/photo-1587069292172-4a9922adc655?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" className="card-img-top" />
+            <img src={props.image ? props.image : (process.env.PUBLIC_URL + '/no-image.png')} className="card-img-top my-auto image" />
             <div className="card-body">
                <h4 className="card-title">{props.title}</h4>
                <StarRatings

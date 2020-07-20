@@ -18,7 +18,7 @@ router.get('/', function (req, res, next) {
       console.log(products)
       let result = products.map(item => ({
         ...item.dataValues,
-        image: item.dataValues.image ? item.dataValues.image[0] : null
+        image: item.dataValues.image ? server_URL + item.dataValues.image[0] : null
       }))
       res.json(result)
     })
