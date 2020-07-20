@@ -38,8 +38,8 @@ function* loadProduct() {
 
 function* postProduct(payload) {
    console.log('payload sagas:', payload)
-   const { title, rate, description, price, brand, detailProduct, category, history } = payload
-   const formPost = { title, rate, description, price, brand, detailProduct, category }
+   const { title, rate, description, price, brand, detailProduct, category, fileId, history } = payload
+   const formPost = { title, rate, description, price, brand, detailProduct, category, fileId }
    yield put(actions.postProductRedux(title, rate, description, price, brand, detailProduct, category));
    try {
       const data = yield call(post, PATH, formPost);
