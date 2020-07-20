@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { Route, BrowserRouter } from 'react-router-dom'
 import './styles/app-style.css';
 import Home from './components/Home';
 import AddAds from './containers/AddAds';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
@@ -15,7 +15,6 @@ function App() {
         <main>
           <Route exact path='/' component={Home} />
           <Route path='/add' component={AddAds} />
-
         </main>
       </div>
     </BrowserRouter>

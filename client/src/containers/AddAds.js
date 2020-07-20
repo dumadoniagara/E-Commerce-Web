@@ -22,8 +22,9 @@ class AddAds extends Component {
 
    handleSubmit = (event) => {
       event.preventDefault();
-      console.log(this.state);
-      this.props.postProduct(this.state)
+      const { history } = this.props;
+      console.log(history)
+      this.props.postProduct(this.state, history);
    }
 
    render() {
@@ -204,7 +205,7 @@ class AddAds extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-   postProduct: (form) => dispatch(postProduct(form))
+   postProduct: (form, history) => dispatch(postProduct(form, history))
 })
 
 export default connect(

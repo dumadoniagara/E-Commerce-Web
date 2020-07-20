@@ -18,7 +18,7 @@ export const loadProductFail = () => ({
 
 /* Post Product start */
 
-export const postProduct = ({ title, rate, description, price, brand, detailProduct, category }) => {
+export const postProduct = ({ title, rate, description, price, brand, detailProduct, category }, history) => {
    console.log('action post product, title:', title)
    return {
       type: 'POST_PRODUCT',
@@ -28,7 +28,8 @@ export const postProduct = ({ title, rate, description, price, brand, detailProd
       price,
       brand,
       detailProduct,
-      category
+      category,
+      history
    }
 }
 

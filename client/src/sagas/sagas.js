@@ -38,19 +38,18 @@ function* loadProduct() {
 
 function* postProduct(payload) {
    console.log('payload sagas:', payload)
-   const { title, rate, description, price, brand, detailProduct, category } = payload
+   const { title, rate, description, price, brand, detailProduct, category, history } = payload
    const formPost = { title, rate, description, price, brand, detailProduct, category }
    yield put(actions.postProductRedux(title, rate, description, price, brand, detailProduct, category));
    try {
       const data = yield call(post, PATH, formPost);
       yield put(actions.postProductSuccess(data));
-      // history.pushState('/')
+      history.push('/')
    }
    catch (error) {
       yield put(actions.postProductFail());
    }
 }
-
 
 export default function* rootSaga() {
    yield all([
