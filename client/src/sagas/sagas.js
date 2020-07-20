@@ -17,9 +17,10 @@ const read = async (path) =>
       })
       .catch(err => { throw err })
 
-const post = async (path) =>
-   await request.post(path)
+const post = async (path, formPost) =>
+   await request.post(path, { ...formPost })
       .then(response => {
+         console.log('data masuk ke api sihh')
          return response.data
       })
       .catch(err => { throw err })
@@ -38,9 +39,10 @@ function* loadProduct() {
 function* postProduct(payload) {
    console.log('payload sagas:', payload)
    const { title, rate, description, price, brand, detailProduct, category } = payload
+   const formPost = { title, rate, description, price, brand, detailProduct, category }
    yield put(actions.postProductRedux(title, rate, description, price, brand, detailProduct, category));
    try {
-      const data = yield call(add, PATH);
+      const data = yield call(post, PATH, formPost);
       yield put(actions.postProductSuccess(data));
       // history.pushState('/')
    }
