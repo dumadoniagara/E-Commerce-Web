@@ -1,13 +1,17 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models/index');
+const path = require('path');
 
 /* get list products */
 router.get('/', function (req, res, next) {
   models.Products.findAll({
     include: [{
       model: models.Specs
-    }]
+    }],
+    order: [
+      ['createdAt', 'ASC']
+    ]
   })
     .then((products) => {
       res.json(products)
@@ -23,6 +27,8 @@ router.get('/', function (req, res, next) {
 /* add new ads */
 router.post('/', (req, res) => {
   let { title, rate, description, price, brand, detailProduct, category } = req.body
+  let { file } = req.files;
+  let filename 
   models.Products.create({
     title,
     rate,
@@ -64,12 +70,24 @@ router.get('/:id', (req, res) => {
     })
 })
 
+/* delete product */
+router.delete('/:id', (req, res) => {
+  models.Products.destroy({
+    returning: true,
+    where: {
+      id: req.params.id
+    }
+  })
+    .then(product => res.json(product))
+    .catch(err => res.json(err))
+})
+
 /* Buy a products */
 router.put('/buy/:id', (req, res) => {
-  const {color, capacity, quantity} = req.body;
+  const { color, capacity, quantity } = req.body;
   models.Products.findOne({
-    where:{
-      id : req.params.id
+    where: {
+      id: req.params.id
     }
   })
 })

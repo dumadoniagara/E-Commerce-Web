@@ -20,6 +20,7 @@ class ListProduct extends Component {
             detailProduct={item.detail_product}
             image={item.image}
             vote={item.vote}
+            rate={item.rate}
          />
       })
       return (

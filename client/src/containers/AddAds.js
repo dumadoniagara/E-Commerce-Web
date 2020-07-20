@@ -12,12 +12,17 @@ class AddAds extends Component {
          price: '',
          brand: '',
          detailProduct: '',
-         category: ''
+         category: '',
+         file: null
       }
    }
 
    handleChange = (event) => {
       this.setState({ [event.target.name]: event.target.value })
+   }
+
+   handleFileUpload = (event) => {
+      
    }
 
    handleSubmit = (event) => {
@@ -27,6 +32,7 @@ class AddAds extends Component {
       this.props.postProduct(this.state, history);
    }
 
+
    render() {
       return (
          <div className="container">
@@ -35,7 +41,7 @@ class AddAds extends Component {
                   Add Ads
                </div>
                <div className="card-body">
-                  <form onSubmit={this.handleSubmit}>
+                  <form onSubmit={this.handleSubmit} encType="multipart/form-data">
                      <div className="row">
                         <div className="col-2">
                            <div className="form-check">
@@ -186,6 +192,34 @@ class AddAds extends Component {
                                  value={this.state.detailProduct}
                                  onChange={this.handleChange}
                               />
+                           </div>
+                        </div>
+                     </div>
+
+                     <div className="row">
+                        <div className="col-2">
+                           <div className="form-check">
+                              <label className="form-check-label">
+                                 <b>Product image</b>
+                              </label>
+                           </div>
+                        </div>
+
+                        <div className="col">
+                           <div className="input-group mb-3">
+                              <div className="input-group-prepend">
+                                 <span className="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                              </div>
+                              <div className="custom-file">
+                                 <input
+                                    className="custom-file-input"
+                                    type="file"
+                                    name="file"
+                                    value={this.state.file}
+                                    onChange={this.handleChange}
+                                 />
+                                 <label className="custom-file-label" for="inputGroupFile01">Choose file</label>
+                              </div>
                            </div>
                         </div>
                      </div>

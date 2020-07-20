@@ -20,6 +20,7 @@ export const loadProductFail = () => ({
 
 export const postProduct = ({ title, rate, description, price, brand, detailProduct, category }, history) => {
    console.log('action post product, title:', title)
+   let fileId = Date.now();
    return {
       type: 'POST_PRODUCT',
       title,
