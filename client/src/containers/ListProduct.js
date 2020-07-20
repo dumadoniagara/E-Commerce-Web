@@ -24,7 +24,7 @@ class ListProduct extends Component {
       })
       return (
          <div className="container">
-            <div className="row">
+            <div className="row row-cols-1 row-cols-md-4">
                {nodes}
             </div>
          </div>
