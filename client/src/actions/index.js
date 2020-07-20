@@ -18,7 +18,7 @@ export const loadProductFail = () => ({
 
 /* Post Product start */
 
-export const postProduct = ({ title, rate, description, price, brand, detailProduct, category }, history) => {
+export const postProduct = ({ title, rate, description, price, brand, detailProduct, category, file }, history) => {
    console.log('action post product, title:', title)
    let fileId = Date.now();
    return {
@@ -30,6 +30,7 @@ export const postProduct = ({ title, rate, description, price, brand, detailProd
       brand,
       detailProduct,
       category,
+      file,
       fileId,
       history
    }

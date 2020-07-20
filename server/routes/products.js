@@ -15,9 +15,12 @@ router.get('/', function (req, res, next) {
     ]
   })
     .then(products => {
-
-      // res.json(result)
-      res.json(products)
+      console.log(products)
+      let result = products.map(item => ({
+        ...item.dataValues,
+        image: item.dataValues.image ? item.dataValues.image[0] : null
+      }))
+      res.json(result)
     })
     .catch(err => {
       res.json({
@@ -31,6 +34,7 @@ router.get('/', function (req, res, next) {
 router.post('/', (req, res) => {
   let { title, rate, description, price, brand, detailProduct, category, fileId } = req.body
   let { file } = req.files;
+  console.log('file:', file)
   let filename = `${fileId}-${file.name}`
   console.log('filename :', filename);
   file.mv(path.join(__dirname, "..", "public", "images", filename), err => {

@@ -17,8 +17,8 @@ const read = async (path) =>
       })
       .catch(err => { throw err })
 
-const post = async (path, formPost) =>
-   await request.post(path, { ...formPost })
+const post = async (path, params) =>
+   await request.post(path, params)
       .then(response => {
          console.log('data masuk ke api sihh')
          return response.data
@@ -38,11 +38,21 @@ function* loadProduct() {
 
 function* postProduct(payload) {
    console.log('payload sagas:', payload)
-   const { title, rate, description, price, brand, detailProduct, category, fileId, history } = payload
-   const formPost = { title, rate, description, price, brand, detailProduct, category, fileId }
+   const { title, rate, description, price, brand, detailProduct, category, file, fileId, history } = payload
+   const formPost = { title, rate, description, price, brand, detailProduct, category, file, fileId }
+
+   const formData = new FormData();
+   for (const key in formPost) {
+      formData.append(key, formPost[key])
+   }
+
    yield put(actions.postProductRedux(title, rate, description, price, brand, detailProduct, category));
    try {
-      const data = yield call(post, PATH, formPost);
+      const data = yield call(post, PATH, formData, {
+         headers: {
+            'Content-Type': 'multipart/form-data'
+         }
+      });
       yield put(actions.postProductSuccess(data));
       history.push('/')
    }
