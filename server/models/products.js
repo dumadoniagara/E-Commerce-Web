@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Products.hasMany(models.Specs);
+      // define association here
     }
   };
   Products.init({
@@ -24,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     image: DataTypes.ARRAY(DataTypes.STRING),
     testimonials: DataTypes.JSON,
     vote: DataTypes.INTEGER,
-    sold: DataTypes.INTEGER
+    sold: DataTypes.INTEGER,
+    color: DataTypes.ARRAY(DataTypes.STRING),
+    capacities: DataTypes.ARRAY(DataTypes.STRING),
+    size: DataTypes.STRING,
+    stock: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Products',

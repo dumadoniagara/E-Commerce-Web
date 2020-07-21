@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { postProduct } from '../actions/index';
+import { postProduct } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class AddAds extends Component {
@@ -14,8 +14,9 @@ class AddAds extends Component {
          detailProduct: '',
          category: '',
          file: '',
-         color: '',
-         capacity: '',
+         color: [],
+         size: [],
+         capacities: [],
          stock: 0
       }
    }
@@ -37,8 +38,30 @@ class AddAds extends Component {
       // this.props.postProduct(this.state, history);
    }
 
+   onAddColor() {
+
+   }
+   onDeleteColor() {
+
+   }
+
 
    render() {
+      const colors = [...Array(4)].map((e, i) => {
+         return (
+            <div className="col-1" key={i}>
+               <div className="form-group">
+                  <input
+                     type="color"
+                     name="color"
+                     required={true}
+                  />
+               </div>
+            </div>
+         )
+      })
+
+
       return (
          <div className="container">
             <div className="card">
@@ -102,7 +125,8 @@ class AddAds extends Component {
                                        </label>
                                     </div>
                                  </div>
-                                 <div className="col">
+
+                                 <div className="col-1">
                                     <div className="form-group">
                                        <input
                                           type="color"
@@ -111,6 +135,14 @@ class AddAds extends Component {
                                           onChange={this.handleChange}
                                           required={true}
                                        />
+                                    </div>
+                                 </div>
+
+                                 {colors}
+
+                                 <div className="col-1">
+                                    <div className="form-group">
+                                       <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-plus-square"></i></button>
                                     </div>
                                  </div>
                               </div>

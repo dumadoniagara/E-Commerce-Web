@@ -7,15 +7,11 @@ const server_URL = "http://localhost:3001";
 /* get list products */
 router.get('/', function (req, res, next) {
   models.Products.findAll({
-    include: [{
-      model: models.Specs
-    }],
     order: [
       ['createdAt', 'ASC']
     ]
   })
     .then(products => {
-      console.log(products)
       let result = products.map(item => ({
         ...item.dataValues,
         image: item.dataValues.image ? server_URL + item.dataValues.image[0] : null
@@ -32,11 +28,11 @@ router.get('/', function (req, res, next) {
 
 /* add new ads */
 router.post('/', (req, res) => {
-  let { title, rate, description, price, brand, detailProduct, category, fileId } = req.body
+  
+  let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size} = req.body
   let { file } = req.files;
-  console.log('file:', file)
   let filename = `${fileId}-${file.name}`
-  console.log('filename :', filename);
+
   file.mv(path.join(__dirname, "..", "public", "images", filename), err => {
     if (err) console.log('error file upload:', err);
     else {
@@ -48,7 +44,11 @@ router.post('/', (req, res) => {
         brand,
         detail_product: detailProduct,
         category,
-        image: [`/images/${filename}`]
+        image: [`/images/${filename}`],
+        color,
+        stock,
+        size,
+        capacities
       })
         .then(products => {
           res.json(products)
@@ -70,10 +70,7 @@ router.get('/:id', (req, res) => {
   models.Products.findOne({
     where: {
       id: req.params.id
-    },
-    include: [{
-      model: models.Specs
-    }]
+    }
   })
     .then(products => {
       let result = products.map(item => ({

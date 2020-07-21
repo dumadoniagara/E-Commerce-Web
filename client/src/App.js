@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, BrowserRouter } from 'react-router-dom'
 import './styles/app-style.css';
 import Home from './components/Home';
-import AddAds from './containers/AddAds';
+import AddAds from './containers/AddForm/AddAds';
 import Navbar from './components/Navbar';
 
 function App() {
