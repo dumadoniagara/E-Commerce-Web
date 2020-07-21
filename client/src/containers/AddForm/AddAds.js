@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { postProduct } from '../../actions/index';
 import { connect } from 'react-redux';
+import { SketchPicker } from 'react-color'
 import convertPrice from '../../helpers/convertPrice';
 import reverseConvertPrice from '../../helpers/reverseConvertPrice';
 
@@ -68,12 +69,7 @@ class AddAds extends Component {
          return (
             <div className="col-1" key={i}>
                <div className="form-group">
-                  <input
-                     id={i}
-                     type="color"
-                     name="color"
-                     required={true}
-                  />
+                  <SketchPicker />
                </div>
             </div>
          )
