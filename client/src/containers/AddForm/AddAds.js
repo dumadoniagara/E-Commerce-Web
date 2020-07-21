@@ -15,7 +15,7 @@ class AddAds extends Component {
          detailProduct: '',
          category: '',
          file: '',
-         color: [],
+         color: ['#rrggbb'],
          size: [],
          capacities: [],
          stock: 0
@@ -43,20 +43,28 @@ class AddAds extends Component {
       this.props.postProduct(this.state, history);
    }
 
-   onAddColor() {
-
+   onAddColor = (event) => {
+      event.preventDefault();
+      let { color } = this.state;
+      console.log(this.state.color)
+      this.setState({ color: [...color, '#rrggbb'] })
    }
-   onDeleteColor() {
-
+   onDeleteColor = (event) => {
+      event.preventDefault();
+      console.log(this.state.color)
+      this.setState(state => ({
+         color: state.color.splice(state.color.length - 1, 1)
+      }))
    }
 
 
    render() {
-      const colors = [...Array(4)].map((e, i) => {
+      const colors = [...this.state.color].map((e, i) => {
          return (
             <div className="col-1" key={i}>
                <div className="form-group">
                   <input
+                     id={i}
                      type="color"
                      name="color"
                      required={true}
@@ -145,11 +153,22 @@ class AddAds extends Component {
 
                                  {colors}
 
-                                 <div className="col-1">
-                                    <div className="form-group">
-                                       <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-plus-square"></i></button>
+                                 {this.state.color.length < 5 &&
+                                    (<div className="col-1">
+                                       <div className="form-group">
+                                          <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-plus-square" onClick={this.onAddColor}></i></button>
+                                       </div>
                                     </div>
-                                 </div>
+                                    )}
+
+                                 {this.state.color.length >= 1 &&
+                                    (<div className="col-1">
+                                       <div className="form-group">
+                                          <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-minus-square" onClick={this.onDeleteColor}></i></button>
+                                       </div>
+                                    </div>
+                                    )}
+
                               </div>
 
                               <div className="row">
