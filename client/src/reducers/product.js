@@ -5,7 +5,7 @@ const product = (state = [], action) => {
             ...item,
             sent: true
          }))
-
+      case 'POST_PRODUCT_FAIL':
       case 'LOAD_PRODUCT_FAIL':
       default:
          return state;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { postProduct } from '../../actions/index';
 import { connect } from 'react-redux';
 import convertPrice from '../../helpers/convertPrice';
+import reverseConvertPrice from '../../helpers/reverseConvertPrice';
 
 class AddAds extends Component {
    constructor(props) {
@@ -18,13 +19,17 @@ class AddAds extends Component {
          color: ['#rrggbb'],
          size: [],
          capacities: [],
-         stock: 0
+         stock: 0,
+         displayPrice: '',
       }
    }
 
    handleChange = (event) => {
-      if (event.target.name == 'price') {
-         this.setState({ [event.target.name]: convertPrice(event.target.value) })
+      if (event.target.name === 'displayPrice') {
+         this.setState({
+            [event.target.name]: convertPrice(event.target.value),
+            price: reverseConvertPrice(event.target.value)
+         })
       } else {
          this.setState({ [event.target.name]: event.target.value })
       }
@@ -40,7 +45,7 @@ class AddAds extends Component {
       const { history } = this.props;
       console.log(this.state);
       console.log(history)
-      this.props.postProduct(this.state, history);
+      // this.props.postProduct(this.state, history);
    }
 
    onAddColor = (event) => {
@@ -128,7 +133,7 @@ class AddAds extends Component {
                      </div>
 
                      {
-                        this.state.category == "phone" && (
+                        this.state.category === "phone" && (
                            <>
                               <div className="row">
                                  <div className="col-2">
@@ -181,13 +186,26 @@ class AddAds extends Component {
                                  </div>
                                  <div className="col">
                                     <div className="form-group">
-                                       <select className="custom-select custom-select" value={this.state.capacity} required={true} name="capacity" className="form-control" onChange={this.handleChange}>
-                                          <option className="form-control" value="32 GB">32 GB</option>
-                                          <option className="form-control" value="64 GB">64 GB</option>
-                                          <option className="form-control" value="128 GB">128 GB</option>
-                                          <option className="form-control" value="256 GB">256 GB</option>
-                                          <option className="form-control" value="512 GB">512 GB</option>
-                                       </select>
+                                       <div className="form-check form-check-inline">
+                                          <input className="form-check-input" name="capacities" type="checkbox" value="32" />
+                                          <label className="form-check-label">32 GB</label>
+                                       </div>
+                                       <div className="form-check form-check-inline">
+                                          <input className="form-check-input" name="capacities" type="checkbox" value="64" />
+                                          <label className="form-check-label">64 GB</label>
+                                       </div>
+                                       <div className="form-check form-check-inline">
+                                          <input className="form-check-input" name="capacities" type="checkbox" value="128" />
+                                          <label className="form-check-label">128 GB</label>
+                                       </div>
+                                       <div className="form-check form-check-inline">
+                                          <input className="form-check-input" name="capacities" type="checkbox" value="256" />
+                                          <label className="form-check-label">256 GB</label>
+                                       </div>
+                                       <div className="form-check form-check-inline">
+                                          <input className="form-check-input" name="capacities" type="checkbox" value="512" />
+                                          <label className="form-check-label">512 GB</label>
+                                       </div>
                                     </div>
                                  </div>
                               </div>
@@ -272,11 +290,11 @@ class AddAds extends Component {
                            <div className="form-group">
                               <input
                                  type="text"
-                                 value={this.state.price}
+                                 value={this.state.displayPrice}
                                  onChange={this.handleChange}
                                  className="form-control"
                                  placeholder="Price"
-                                 name="price"
+                                 name="displayPrice"
                               />
                            </div>
                         </div>

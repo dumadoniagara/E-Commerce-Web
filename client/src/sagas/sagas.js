@@ -44,8 +44,6 @@ function* postProduct(payload) {
    for (const key in formPost) {
       formData.append(key, formPost[key])
    }
-
-   yield put(actions.postProductRedux(title, rate, description, price, brand, detailProduct, category));
    try {
       const data = yield call(post, PATH, formData, {
          headers: {
@@ -56,6 +54,7 @@ function* postProduct(payload) {
       history.push('/')
    }
    catch (error) {
+      console.log('errornya kenapa:', error)
       yield put(actions.postProductFail());
    }
 }

@@ -18,7 +18,7 @@ export const loadProductFail = () => ({
 
 /* Post Product start */
 
-export const postProduct = ({ title, rate, description, price, brand, detailProduct, category, file }, history) => {
+export const postProduct = ({ title, rate, description, price, brand, detailProduct, category, file, color, stock, size, capacities }, history) => {
    console.log('action post product, title:', title)
    let fileId = Date.now();
    return {
@@ -35,17 +35,6 @@ export const postProduct = ({ title, rate, description, price, brand, detailProd
       history
    }
 }
-
-export const postProductRedux = (title, rate, description, price, brand, detailProduct, category) => ({
-   type: 'POST_PRODUCT_REDUX',
-   title,
-   rate,
-   description,
-   price,
-   brand,
-   detailProduct,
-   category
-})
 
 export const postProductSuccess = (product) => ({
    type: 'POST_PRODUCT_SUCCESS',
