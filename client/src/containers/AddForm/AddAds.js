@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { postProduct } from '../../actions/index';
 import { connect } from 'react-redux';
+import convertPrice from '../../helpers/convertPrice';
 
 class AddAds extends Component {
    constructor(props) {
@@ -22,7 +23,11 @@ class AddAds extends Component {
    }
 
    handleChange = (event) => {
-      this.setState({ [event.target.name]: event.target.value })
+      if (event.target.name == 'price') {
+         this.setState({ [event.target.name]: convertPrice(event.target.value) })
+      } else {
+         this.setState({ [event.target.name]: event.target.value })
+      }
    }
 
    handleFileUpload = (event) => {
@@ -34,8 +39,8 @@ class AddAds extends Component {
       event.preventDefault();
       const { history } = this.props;
       console.log(this.state);
-      // console.log(history)
-      // this.props.postProduct(this.state, history);
+      console.log(history)
+      this.props.postProduct(this.state, history);
    }
 
    onAddColor() {

@@ -28,10 +28,10 @@ router.get('/', function (req, res, next) {
 
 /* add new ads */
 router.post('/', (req, res) => {
-  
-  let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size} = req.body
+
+  let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size } = req.body;
   let { file } = req.files;
-  let filename = `${fileId}-${file.name}`
+  let filename = `${fileId}-${file.name}`;
 
   file.mv(path.join(__dirname, "..", "public", "images", filename), err => {
     if (err) console.log('error file upload:', err);
@@ -62,7 +62,6 @@ router.post('/', (req, res) => {
         })
     }
   })
-
 })
 
 /* find product details */

@@ -1,5 +1,6 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
+import convertPrice from '../helpers/convertPrice';
 
 export default function CardProduct(props) {
    return (
@@ -17,7 +18,7 @@ export default function CardProduct(props) {
                />
                <p className="card-text mt-3">{props.description}</p>
             </div>
-            <h5 className="text-left">Rp. {props.price}</h5>
+            <h5 className="text-left">{convertPrice(props.price)}</h5>
             <a href="#" className="btn btn-outline-info">Detail item</a>
          </div>
       </div>
