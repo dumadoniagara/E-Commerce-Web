@@ -13,7 +13,10 @@ class AddAds extends Component {
          brand: '',
          detailProduct: '',
          category: '',
-         file: ''
+         file: '',
+         color: '',
+         capacity: '',
+         stock: 0
       }
    }
 
@@ -29,8 +32,9 @@ class AddAds extends Component {
    handleSubmit = (event) => {
       event.preventDefault();
       const { history } = this.props;
-      console.log(history)
-      this.props.postProduct(this.state, history);
+      console.log(this.state);
+      // console.log(history)
+      // this.props.postProduct(this.state, history);
    }
 
 
@@ -87,6 +91,74 @@ class AddAds extends Component {
                         </div>
                      </div>
 
+                     {
+                        this.state.category == "phone" && (
+                           <>
+                              <div className="row">
+                                 <div className="col-2">
+                                    <div className="form-check">
+                                       <label className="form-check-label">
+                                          <b>Color</b>
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div className="col">
+                                    <div className="form-group">
+                                       <input
+                                          type="color"
+                                          value={this.state.color}
+                                          name="color"
+                                          onChange={this.handleChange}
+                                          required={true}
+                                       />
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div className="row">
+                                 <div className="col-2">
+                                    <div className="form-check">
+                                       <label className="form-check-label">
+                                          <b>Capacity</b>
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div className="col">
+                                    <div className="form-group">
+                                       <select className="custom-select custom-select" value={this.state.capacity} required={true} name="capacity" className="form-control" onChange={this.handleChange}>
+                                          <option className="form-control" value="32 GB">32 GB</option>
+                                          <option className="form-control" value="64 GB">64 GB</option>
+                                          <option className="form-control" value="128 GB">128 GB</option>
+                                          <option className="form-control" value="256 GB">256 GB</option>
+                                          <option className="form-control" value="512 GB">512 GB</option>
+                                       </select>
+                                    </div>
+                                 </div>
+                              </div>
+
+                              <div className="row">
+                                 <div className="col-2">
+                                    <div className="form-check">
+                                       <label className="form-check-label">
+                                          <b>Stock</b>
+                                       </label>
+                                    </div>
+                                 </div>
+                                 <div className="col">
+                                    <div className="form-group">
+                                       <input
+                                          type="number"
+                                          value={this.state.stock}
+                                          onChange={this.handleChange}
+                                          className="form-control"
+                                          name="stock"
+                                       />
+                                    </div>
+                                 </div>
+                              </div>
+                           </>
+                        )
+                     }
 
                      <div className="row">
                         <div className="col-2">

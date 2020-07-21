@@ -2,7 +2,6 @@ import React from 'react';
 import StarRatings from 'react-star-ratings';
 
 export default function CardProduct(props) {
-   console.log(props)
    return (
       <div className="col mb-4">
          <div className="card p-2 h-100">

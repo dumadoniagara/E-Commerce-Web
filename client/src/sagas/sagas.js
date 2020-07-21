@@ -20,7 +20,6 @@ const read = async (path) =>
 const post = async (path, params) =>
    await request.post(path, params)
       .then(response => {
-         console.log('data masuk ke api sihh')
          return response.data
       })
       .catch(err => { throw err })
