@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { postProduct } from '../../actions/index';
 import { connect } from 'react-redux';
-import { SketchPicker } from 'react-color'
 import convertPrice from '../../helpers/convertPrice';
 import reverseConvertPrice from '../../helpers/reverseConvertPrice';
 
@@ -17,12 +16,17 @@ class AddAds extends Component {
          detailProduct: '',
          category: '',
          file: '',
-         color: ['#rrggbb'],
+         color: ["#030303"],
          size: [],
          capacities: [],
          stock: 0,
          displayPrice: '',
       }
+   }
+
+   componentDidUpdate() {
+      let { color, capacities } = this.state
+      console.log('color:', color, 'capacities', capacities)
    }
 
    handleChange = (event) => {
@@ -52,24 +56,52 @@ class AddAds extends Component {
    onAddColor = (event) => {
       event.preventDefault();
       let { color } = this.state;
-      console.log(this.state.color)
-      this.setState({ color: [...color, '#rrggbb'] })
+      this.setState({ color: [...color, '#030303'] })
    }
    onDeleteColor = (event) => {
       event.preventDefault();
-      console.log(this.state.color)
-      this.setState(state => ({
-         color: state.color.splice(state.color.length - 1, 1)
-      }))
+      let popColor = [...this.state.color];
+      popColor.splice(popColor.length - 1, 1)
+      this.setState(({ color: popColor }))
    }
 
+   handleChangeColor = (event) => {
+      const { name, value } = event.target;
+      let changedColor = [...this.state.color];
+      changedColor.splice(name, 1, value);
+      this.setState({ color: changedColor });
+   }
+
+   handleChecked = (event) => {
+      const { value } = event.target;
+      let { capacities } = this.state;
+      if (event.target.checked) {
+         let checked = [...capacities, value];
+         checked.sort(function (a, b) {
+            return a - b;
+         })
+         this.setState({ capacities: checked });
+      } else if (!event.target.checked) {
+         this.setState({ capacities: capacities.filter(item => item !== value) })
+      }
+   }
 
    render() {
       const colors = [...this.state.color].map((e, i) => {
          return (
             <div className="col-1" key={i}>
                <div className="form-group">
-                  <SketchPicker />
+                  <div className="col-1">
+                     <div className="form-group">
+                        <input
+                           type="color"
+                           value={this.state.color[i]}
+                           name={i}
+                           onChange={this.handleChangeColor}
+                           required={true}
+                        />
+                     </div>
+                  </div>
                </div>
             </div>
          )
@@ -135,20 +167,8 @@ class AddAds extends Component {
                                  <div className="col-2">
                                     <div className="form-check">
                                        <label className="form-check-label">
-                                          <b>Color</b>
+                                          <b>Available Color</b>
                                        </label>
-                                    </div>
-                                 </div>
-
-                                 <div className="col-1">
-                                    <div className="form-group">
-                                       <input
-                                          type="color"
-                                          value={this.state.color}
-                                          name="color"
-                                          onChange={this.handleChange}
-                                          required={true}
-                                       />
                                     </div>
                                  </div>
 
@@ -157,15 +177,15 @@ class AddAds extends Component {
                                  {this.state.color.length < 5 &&
                                     (<div className="col-1">
                                        <div className="form-group">
-                                          <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-plus-square" onClick={this.onAddColor}></i></button>
+                                          <button onClick={this.onAddColor} className="btn"><i style={{ fontSize: "20px" }} className="far fa-plus-square" ></i></button>
                                        </div>
                                     </div>
                                     )}
 
-                                 {this.state.color.length >= 1 &&
+                                 {this.state.color.length > 1 &&
                                     (<div className="col-1">
                                        <div className="form-group">
-                                          <button className="btn"><i style={{ fontSize: "20px" }} className="far fa-minus-square" onClick={this.onDeleteColor}></i></button>
+                                          <button onClick={this.onDeleteColor} className="btn"><i style={{ fontSize: "20px" }} className="far fa-minus-square" ></i></button>
                                        </div>
                                     </div>
                                     )}
@@ -176,30 +196,30 @@ class AddAds extends Component {
                                  <div className="col-2">
                                     <div className="form-check">
                                        <label className="form-check-label">
-                                          <b>Capacity</b>
+                                          <b>Available Capacity</b>
                                        </label>
                                     </div>
                                  </div>
                                  <div className="col">
                                     <div className="form-group">
                                        <div className="form-check form-check-inline">
-                                          <input className="form-check-input" name="capacities" type="checkbox" value="32" />
+                                          <input className="form-check-input" name="capacities" type="checkbox" onChange={this.handleChecked} value={32} />
                                           <label className="form-check-label">32 GB</label>
                                        </div>
                                        <div className="form-check form-check-inline">
-                                          <input className="form-check-input" name="capacities" type="checkbox" value="64" />
+                                          <input className="form-check-input" name="capacities" type="checkbox" onChange={this.handleChecked} value={64} />
                                           <label className="form-check-label">64 GB</label>
                                        </div>
                                        <div className="form-check form-check-inline">
-                                          <input className="form-check-input" name="capacities" type="checkbox" value="128" />
+                                          <input className="form-check-input" name="capacities" type="checkbox" onChange={this.handleChecked} value={128} />
                                           <label className="form-check-label">128 GB</label>
                                        </div>
                                        <div className="form-check form-check-inline">
-                                          <input className="form-check-input" name="capacities" type="checkbox" value="256" />
+                                          <input className="form-check-input" name="capacities" type="checkbox" onChange={this.handleChecked} value={256} />
                                           <label className="form-check-label">256 GB</label>
                                        </div>
                                        <div className="form-check form-check-inline">
-                                          <input className="form-check-input" name="capacities" type="checkbox" value="512" />
+                                          <input className="form-check-input" name="capacities" type="checkbox" onChange={this.handleChecked} value={512} />
                                           <label className="form-check-label">512 GB</label>
                                        </div>
                                     </div>
