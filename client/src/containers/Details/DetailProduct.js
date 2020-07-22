@@ -3,13 +3,19 @@ import '../../styles/buy.css';
 import { connect } from 'react-redux';
 import convertPrice from '../../helpers/convertPrice';
 import ReactMarkdown from 'react-markdown';
-import Testimoni from './Testimoni';
+import Testimoni from './MiniDetails/Testimoni';
+import ColorOptions from './MiniDetails/ColorOptions';
+import SpecOptions from './MiniDetails/SpecOptions';
 
 class DetailProduct extends Component {
    constructor(props) {
       super(props);
       this.state = {
-         isDetailTabActive: true
+         isDetailTabActive: true,
+         color: null,
+         capacities: null,
+         quantity: 1,
+         like: false
       }
    }
 
@@ -19,11 +25,17 @@ class DetailProduct extends Component {
       this.setState({ isDetailTabActive: !isDetailTabActive })
    }
 
-   render() {
-      console.log('state detail sekarang:', this.props.detail)
-      const { isDetailTabActive } = this.state;
+   handleColorChange = (color) => {
+      this.setState({ color })
+   }
 
+   render() {
+
+      const { isDetailTabActive } = this.state;
       const { brand, capacities, color, description, detail_product, image, price, rate, testimonials, title, vote } = this.props.detail;
+      let colors = color || [];
+      let capacity = capacities || [];
+
       return (
          <div className="container">
             <div className="card mb-3">
@@ -34,9 +46,22 @@ class DetailProduct extends Component {
                   <div className="col-md-8">
                      <div className="card-body">
                         <h5 className="card-title">{title}</h5>
-                        <h6>Brand {brand} </h6>
+                        <h6>Brand {brand} <small className="text-muted">vote ({!vote ? 0 : vote})</small></h6>
                         <p className="card-text"><small className="text-muted">PRICE</small></p>
-                        <h5>{convertPrice(price)}</h5>
+                        <h5 style={{ marginTop: "-15px" }}>{convertPrice(price)}</h5>
+
+                        <ColorOptions
+                           colors={colors}
+                           activeColor={this.state.color}
+                        />
+
+                        <SpecOptions
+                           capacity={capacity}
+                           activeCapacities={this.state.capacities}
+                        />
+
+                        <button type="button" className="btn btn-outline-info mt-2 btn-block">Buy item <i className="fa fa-cart-arrow-down fa-lg mx-2"></i></button>
+
                      </div>
                   </div>
                </div>
@@ -44,12 +69,12 @@ class DetailProduct extends Component {
                <div className="card mt-3">
                   <div className="container-fluid">
                      <div className="col-md-12 product-info">
-                        <ul class="nav nav-tabs">
-                           <li class="nav-item" onClick={this.changeTab}>
-                              <a class={isDetailTabActive ? "nav-link active" : "nav-link"} href="#">Product Detail</a>
+                        <ul className="nav nav-tabs">
+                           <li className="nav-item" onClick={this.changeTab}>
+                              <a className={isDetailTabActive ? "nav-link active" : "nav-link"} href="#">Product Detail</a>
                            </li>
-                           <li class="nav-item" onClick={this.changeTab}>
-                              <a class={!isDetailTabActive ? "nav-link active" : "nav-link"} href="#">Testimonial</a>
+                           <li className="nav-item" onClick={this.changeTab}>
+                              <a className={!isDetailTabActive ? "nav-link active" : "nav-link"} href="#">Testimonial</a>
                            </li>
                         </ul>
                      </div>
