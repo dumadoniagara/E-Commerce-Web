@@ -49,8 +49,20 @@ export const postProductFail = () => ({
    type: 'POST_PRODUCT_FAIL'
 })
 
-
-
 /* Post Product end */
 
+/* Load Details Start */
+export const loadDetails = (id) => ({
+   type: 'LOAD_DETAILS',
+   id
+})
+
+export const loadDetailsSuccess = (details) => ({
+   type : 'LOAD_DETAILS_SUCCESS',
+   details
+})
+
+export const loadDetailsFail = () => ({
+   type : 'LOAD_DETAILS_FAIL'
+})
 

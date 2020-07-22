@@ -72,11 +72,12 @@ router.get('/:id', (req, res) => {
       id: req.params.id
     }
   })
-    .then(products => {
-      let result = products.map(item => ({
-        ...item,
-        image: server_URL + image[0]
-      }))
+    .then(product => {
+      console.log(product.dataValues);
+      let result = {
+        ...product.dataValues,
+        image: server_URL + product.dataValues.image[0]
+      }
       res.json(result)
     })
     .catch(err => {

@@ -3,6 +3,7 @@ import { Route, BrowserRouter } from 'react-router-dom'
 import './styles/app-style.css';
 import Home from './components/Home';
 import AddAds from './containers/AddForm/AddAds';
+import DetailProduct from './containers/Details/DetailProduct'
 import Navbar from './components/Navbar';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <main>
           <Route exact path='/' component={Home} />
           <Route path='/add' component={AddAds} />
+          <Route path='/detail' component={DetailProduct} />
         </main>
       </div>
     </BrowserRouter>

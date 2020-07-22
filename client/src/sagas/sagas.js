@@ -24,6 +24,13 @@ const post = async (path, params) =>
       })
       .catch(err => { throw err })
 
+const detail = async (path, params) =>
+   await request.get(path)
+      .then(response => {
+         return response.data
+      })
+      .catch(err => { throw err })
+
 
 function* loadProduct() {
    try {
@@ -59,9 +66,22 @@ function* postProduct(payload) {
    }
 }
 
+function* loadDetails(payload) {
+   const { id } = payload
+   console.log('payload sagas loadDetails: ', payload)
+   try {
+      const data = yield call(detail, `${PATH}/${id}`);
+      yield put(actions.loadDetailsSuccess(data));
+   }
+   catch (error) {
+      yield put(actions.loadDetailsFail());
+   }
+}
+
 export default function* rootSaga() {
    yield all([
       takeEvery('LOAD_PRODUCT', loadProduct),
-      takeEvery('POST_PRODUCT', postProduct)
+      takeEvery('POST_PRODUCT', postProduct),
+      takeEvery('LOAD_DETAILS', loadDetails),
    ]);
 }
