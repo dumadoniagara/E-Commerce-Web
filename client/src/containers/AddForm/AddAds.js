@@ -17,16 +17,11 @@ class AddAds extends Component {
          category: '',
          file: '',
          color: ["#030303"],
-         size: [],
+         size: '',
          capacities: [],
          stock: 0,
          displayPrice: '',
       }
-   }
-
-   componentDidUpdate() {
-      let { color, capacities } = this.state
-      console.log('color:', color, 'capacities', capacities)
    }
 
    handleChange = (event) => {
@@ -50,7 +45,7 @@ class AddAds extends Component {
       const { history } = this.props;
       console.log(this.state);
       console.log(history)
-      // this.props.postProduct(this.state, history);
+      this.props.postProduct(this.state, history);
    }
 
    onAddColor = (event) => {

@@ -32,6 +32,7 @@ router.post('/', (req, res) => {
   let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size } = req.body;
   let { file } = req.files;
   let filename = `${fileId}-${file.name}`;
+  console.log(title, rate, description, price, brand, detailProduct, category, fileId, color.split(','), capacities.split(','), stock, size)
 
   file.mv(path.join(__dirname, "..", "public", "images", filename), err => {
     if (err) console.log('error file upload:', err);
@@ -45,10 +46,10 @@ router.post('/', (req, res) => {
         detail_product: detailProduct,
         category,
         image: [`/images/${filename}`],
-        color,
+        color: color.split(','),
         stock,
-        size,
-        capacities
+        size: size,
+        capacities: capacities.split(',')
       })
         .then(products => {
           res.json(products)

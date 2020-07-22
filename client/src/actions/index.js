@@ -31,6 +31,10 @@ export const postProduct = ({ title, rate, description, price, brand, detailProd
       detailProduct,
       category,
       file,
+      color,
+      stock,
+      capacities,
+      size,
       fileId,
       history
    }
