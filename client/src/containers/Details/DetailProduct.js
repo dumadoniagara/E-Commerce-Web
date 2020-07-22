@@ -6,11 +6,6 @@ import { loadDetails } from '../../actions/index';
 class DetailProduct extends Component {
    constructor(props) {
       super(props)
-
-   }
-
-   componentDidMount() {
-      this.props.loadDetails();
    }
 
    render() {
@@ -39,11 +34,7 @@ const mapStateToProps = (state) => ({
    product: state.detail
 })
 
-const mapDispatchToProps = (dispatch) => ({
-   loadDetails: () => dispatch(loadDetails())
-})
-
 export default connect(
    mapStateToProps,
-   mapDispatchToProps
+   null
 )(DetailProduct)
