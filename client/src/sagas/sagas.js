@@ -43,10 +43,8 @@ function* loadProduct() {
 }
 
 function* postProduct(payload) {
-   console.log('payload sagas:', payload)
    const { title, rate, description, price, brand, detailProduct, category, file, capacities, color, size, stock, fileId, history } = payload
    const formPost = { title, rate, description, price, brand, detailProduct, category, file, capacities, color, size, stock, fileId }
-   console.log(formPost);
    const formData = new FormData();
    for (const key in formPost) {
       formData.append(key, formPost[key])
@@ -61,14 +59,12 @@ function* postProduct(payload) {
       history.push('/')
    }
    catch (error) {
-      console.log('errornya kenapa:', error)
       yield put(actions.postProductFail());
    }
 }
 
 function* loadDetails(payload) {
    const { id } = payload
-   console.log('payload sagas loadDetails: ', payload)
    try {
       const data = yield call(detail, `${PATH}/${id}`);
       yield put(actions.loadDetailsSuccess(data));

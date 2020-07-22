@@ -9,8 +9,7 @@ class CardProduct extends Component {
 
    onDetail = () => {
       console.log(this.props)
-      // props.loadDetails(props.id)
-      // to={`/detail/${props.id}`}
+      this.props.loadDetails(this.props.id)
    }
 
    render() {
