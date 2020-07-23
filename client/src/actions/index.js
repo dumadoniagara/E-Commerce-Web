@@ -1,8 +1,10 @@
 
 /* Load Product start */
-export const loadProduct = () => {
+export const loadProduct = (page = 1) => {
+   console.log('PAGE di load product', page);
    return {
-      type: 'LOAD_PRODUCT'
+      type: 'LOAD_PRODUCT',
+      page
    }
 }
 
@@ -58,11 +60,11 @@ export const loadDetails = (id) => ({
 })
 
 export const loadDetailsSuccess = (details) => ({
-   type : 'LOAD_DETAILS_SUCCESS',
+   type: 'LOAD_DETAILS_SUCCESS',
    details
 })
 
 export const loadDetailsFail = () => ({
-   type : 'LOAD_DETAILS_FAIL'
+   type: 'LOAD_DETAILS_FAIL'
 })
 

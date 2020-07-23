@@ -13,8 +13,21 @@ class ListProduct extends Component {
       }
    }
 
+   componentDidUpdate() {
+      console.log(this.state.page);
+   }
+
    componentDidMount() {
-      this.props.loadProduct();
+      this.props.loadProduct(this.state.page);
+   }
+
+   fetchMoreData = () => {
+      console.log('ke ujung')
+      this.setState(
+         state => ({ page: state.page + 1 }),
+         () => {
+            this.props.loadProduct(this.state.page)
+         })
    }
 
    render() {
@@ -33,11 +46,25 @@ class ListProduct extends Component {
          />
       })
       return (
-         <div className="container">
-            <div className="row row-cols-1 row-cols-md-4">
-               {products}
+         <InfiniteScroll
+            dataLength={this.props.product.length}
+            next={this.fetchMoreData}
+            hasMore={this.state.hasMore}
+            loader={
+               <div className="d-flex justify-content-center">
+                  <h4>Loading...</h4>
+               </div>
+            }
+            endMessage={
+               <h4>You've seen it all</h4>
+            }
+         >
+            <div className="container">
+               <div className="row row-cols-1 row-cols-md-4">
+                  {products}
+               </div>
             </div>
-         </div>
+         </InfiniteScroll>
       )
    }
 }
@@ -47,7 +74,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-   loadProduct: () => dispatch(loadProduct())
+   loadProduct: (page) => dispatch(loadProduct(page))
 })
 
 export default connect(

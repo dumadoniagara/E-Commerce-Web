@@ -6,10 +6,18 @@ const server_URL = "http://localhost:3001";
 
 /* get list products */
 router.get('/', function (req, res, next) {
+  let page = Number(req.header('page')) || 1;
+  let limit = Number(req.header('limit')) || 4;
+  let offset = (page - 1) * limit;
+
+  console.log('PAGE:', page, 'LIMIT:', limit);
+
   models.Products.findAll({
     order: [
       ['createdAt', 'ASC']
-    ]
+    ],
+    limit,
+    offset
   })
     .then(products => {
       let result = products.map(item => ({

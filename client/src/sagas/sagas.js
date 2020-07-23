@@ -10,8 +10,8 @@ const request = axios.create({
 
 const PATH = 'product';
 
-const read = async (path) =>
-   await request.get(path)
+const read = async (path, params) =>
+   await request.get(path, params)
       .then(response => {
          return response.data
       })
@@ -32,9 +32,15 @@ const detail = async (path, params) =>
       .catch(err => { throw err })
 
 
-function* loadProduct() {
+function* loadProduct(payload) {
+   const { page } = payload;
+   console.log('PAYLOAD PAGE', page)
    try {
-      const data = yield call(read, PATH);
+      const data = yield call(read, PATH, {
+         headers: {
+            page
+         }
+      });
       yield put(actions.loadProductSuccess(data));
    }
    catch (error) {
