@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import CardProduct from './CardProduct';
-import { loadProduct } from '../actions/index';
+import { loadProduct, resetStateProduct } from '../actions/index';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
@@ -19,6 +19,10 @@ class ListProduct extends Component {
 
    componentDidMount() {
       this.props.loadProduct(this.state.page);
+   }
+
+   componentWillUnmount() {
+      this.props.resetStateProduct();
    }
 
    fetchMoreData = () => {
@@ -58,6 +62,7 @@ class ListProduct extends Component {
             endMessage={
                <h4>You've seen it all</h4>
             }
+            scrollThreshold={1}
          >
             <div className="container">
                <div className="row row-cols-1 row-cols-md-4">
@@ -74,7 +79,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-   loadProduct: (page) => dispatch(loadProduct(page))
+   loadProduct: (page) => dispatch(loadProduct(page)),
+   resetStateProduct: () => dispatch(resetStateProduct())
 })
 
 export default connect(

@@ -1,4 +1,3 @@
-
 /* Load Product start */
 export const loadProduct = (page = 1) => {
    console.log('PAGE di load product', page);
@@ -19,7 +18,6 @@ export const loadProductFail = () => ({
 /* Load Product end */
 
 /* Post Product start */
-
 export const postProduct = ({ title, rate, description, price, brand, detailProduct, category, file, color, stock, size, capacities }, history) => {
    console.log('action post product, title:', title)
    let fileId = Date.now();
@@ -50,7 +48,6 @@ export const postProductSuccess = (product) => ({
 export const postProductFail = () => ({
    type: 'POST_PRODUCT_FAIL'
 })
-
 /* Post Product end */
 
 /* Load Details Start */
@@ -66,5 +63,9 @@ export const loadDetailsSuccess = (details) => ({
 
 export const loadDetailsFail = () => ({
    type: 'LOAD_DETAILS_FAIL'
+})
+
+export const resetStateProduct = () => ({
+   type: 'RESET_PRODUCT'
 })
 
