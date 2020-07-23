@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
 
   console.log('PAGE:', page, 'LIMIT:', limit);
 
-  models.Products.findAll({
+  models.Products.findAndCountAll({
     order: [
       ['createdAt', 'ASC']
     ],
@@ -20,11 +20,15 @@ router.get('/', function (req, res, next) {
     offset
   })
     .then(products => {
-      let result = products.map(item => ({
+      let numOfPages = Math.ceil(products.count / limit);
+      let result = products.rows.map(item => ({
         ...item.dataValues,
         image: item.dataValues.image ? server_URL + item.dataValues.image[0] : null
       }))
-      res.json(result)
+      res.json({
+        numOfPages,
+        result
+      })
     })
     .catch(err => {
       res.json({
@@ -36,7 +40,6 @@ router.get('/', function (req, res, next) {
 
 /* add new ads */
 router.post('/', (req, res) => {
-
   let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size } = req.body;
   let { file } = req.files;
   let filename = `${fileId}-${file.name}`;

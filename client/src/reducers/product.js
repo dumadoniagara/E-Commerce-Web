@@ -1,14 +1,18 @@
-const product = (state = [], action) => {
+const product = (state = { numOfPages: 0, rows: [] }, action) => {
    switch (action.type) {
       case 'LOAD_PRODUCT_SUCCESS':
-         return [...state,
-         ...action.product.map((item) => ({
-            ...item,
-            sent: true
-         }))
-         ]
+         return {
+            ...state,
+            numOfPages: action.product.numOfPages,
+            rows: [...state.rows,
+            ...action.product.result.map((item) => ({
+               ...item,
+               sent: true
+            }))
+            ]
+         }
       case 'RESET_PRODUCT':
-         return []
+         return { numOfPages: 0, rows: [] }
       case 'POST_PRODUCT_FAIL':
       case 'LOAD_PRODUCT_FAIL':
       default:

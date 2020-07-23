@@ -9,7 +9,8 @@ class ListProduct extends Component {
       super(props)
       this.state = {
          page: 1,
-         hasMore: true
+         hasMore: true,
+         limit: 4
       }
    }
 
@@ -26,12 +27,16 @@ class ListProduct extends Component {
    }
 
    fetchMoreData = () => {
-      console.log('ke ujung')
-      this.setState(
-         state => ({ page: state.page + 1 }),
-         () => {
-            this.props.loadProduct(this.state.page)
-         })
+      if (this.props.numOfPages >= this.state.page) {
+         this.setState(
+            state => ({ page: state.page + 1 }),
+            () => {
+               this.props.loadProduct(this.state.page)
+            })
+      }
+      if (this.props.numOfPages === this.state.page) {
+         this.setState({ hasMore: false })
+      }
    }
 
    render() {
@@ -60,7 +65,7 @@ class ListProduct extends Component {
                </div>
             }
             endMessage={
-               <h4>You've seen it all</h4>
+               <h4 className="d-flex justify-content-center">Data dari Backend sudah habis ...</h4>
             }
             scrollThreshold={1}
          >
@@ -75,7 +80,8 @@ class ListProduct extends Component {
 }
 
 const mapStateToProps = (state) => ({
-   product: state.product
+   product: state.product.rows,
+   numOfPages: state.product.numOfPages
 })
 
 const mapDispatchToProps = (dispatch) => ({

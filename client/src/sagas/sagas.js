@@ -34,13 +34,14 @@ const detail = async (path, params) =>
 
 function* loadProduct(payload) {
    const { page } = payload;
-   console.log('PAYLOAD PAGE', page)
    try {
       const data = yield call(read, PATH, {
          headers: {
-            page
+            page,
+            limit: 4
          }
-      });
+      })
+      console.log('DATA DI LOAD PRODUCT:', data);
       yield put(actions.loadProductSuccess(data));
    }
    catch (error) {
