@@ -9,9 +9,7 @@ router.get('/', function (req, res, next) {
   let page = Number(req.header('page')) || 1;
   let limit = Number(req.header('limit')) || 4;
   let offset = (page - 1) * limit;
-
-  console.log('PAGE:', page, 'LIMIT:', limit);
-
+  
   models.Products.findAndCountAll({
     order: [
       ['createdAt', 'ASC']
@@ -43,8 +41,6 @@ router.post('/', (req, res) => {
   let { title, rate, description, price, brand, detailProduct, category, fileId, color, capacities, stock, size } = req.body;
   let { file } = req.files;
   let filename = `${fileId}-${file.name}`;
-  console.log(title, rate, description, price, brand, detailProduct, category, fileId, color.split(','), capacities.split(','), stock, size)
-
   file.mv(path.join(__dirname, "..", "public", "images", filename), err => {
     if (err) console.log('error file upload:', err);
     else {
