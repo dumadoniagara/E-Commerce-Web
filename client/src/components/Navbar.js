@@ -23,14 +23,19 @@ const Navbar = (props) => {
                   <li className="nav-item">
                      <Link to="/" className="nav-link">Home</Link>
                   </li>
-                  <li className="nav-item">
-                     <Link to="/category" className="nav-link">Category</Link>
+                  <li className="nav-item dropdown">
+                     <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Category
+                     </a>
+                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a className="dropdown-item" href="#">Phone</a>
+                        <a className="dropdown-item" href="#">Fashion</a>
+                        <a className="dropdown-item" href="#">Car/Motorcycle</a>
+                        <a className="dropdown-item" href="#">Electronic</a>
+                     </div>
                   </li>
                   <li className="nav-item">
-                     <Link to="/add" className="nav-link">New Add</Link>
-                  </li>
-                  <li className="nav-item">
-                     <Link to="/transaction" className="nav-link">Transaction</Link>
+                     <Link to="/add" className="nav-link">Add New Ads</Link>
                   </li>
                </ul>
                <form className="form-inline my-2 my-lg-0 mr-5">

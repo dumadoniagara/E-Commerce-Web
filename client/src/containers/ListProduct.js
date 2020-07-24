@@ -65,7 +65,9 @@ class ListProduct extends Component {
                </div>
             }
             endMessage={
-               <h4 className="d-flex justify-content-center">Data dari Backend sudah habis ...</h4>
+               <div className="container">
+                  <footer className="text-center">© 2020 Duma Doniagara Sambora </footer>
+               </div>
             }
             scrollThreshold={1}
          >

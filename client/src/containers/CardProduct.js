@@ -16,7 +16,7 @@ class CardProduct extends Component {
       return (
          <>
             <div className="col mb-4">
-               <div className="card p-2 h-100">
+               <div className="card p-2 h-100 shadow p-3 mb-5 bg-white rounded">
                   <img src={this.props.image ? this.props.image : (process.env.PUBLIC_URL + '/no-image.png')} className="card-img-top my-auto image" />
                   <div className="card-body">
                      <h4 className="card-title">{this.props.title}</h4>
