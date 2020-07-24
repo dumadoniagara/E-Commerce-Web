@@ -374,7 +374,6 @@ class AddAds extends Component {
                                     type="file"
                                     name="file"
                                     onChange={this.handleFileUpload}
-                                    required={true}
                                  />
                                  <label className="custom-file-label" >Choose file</label>
                               </div>

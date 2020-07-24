@@ -17,8 +17,14 @@ class DetailProduct extends Component {
          capacities: null,
          quantity: 1,
          like: false,
-         pcs: 1
+         pcs: 1,
+         activeColor: null
       }
+   }
+
+   componentDidUpdate() {
+      const { activeColor } = this.state
+      console.log(activeColor);
    }
 
    changeTab = (e) => {
@@ -27,16 +33,16 @@ class DetailProduct extends Component {
       this.setState({ isDetailTabActive: !isDetailTabActive })
    }
 
-   handleColorChange = (color) => {
-      this.setState({ color })
-   }
-
    onIncrement = () => {
       this.setState({ pcs: this.state.pcs + 1 })
    }
 
    onDecrement = () => {
       this.setState({ pcs: this.state.pcs - 1 })
+   }
+
+   handleActiveColor = (color) => {
+      this.setState({ activeColor: color })
    }
 
    render() {
@@ -54,7 +60,7 @@ class DetailProduct extends Component {
                      <img src={image} className="card-img" alt="gambar product" />
                   </div>
 
-                  <div className="col-md-8">
+                  <div className="col-md-6 offset-md-1">
                      <div className="card-body">
                         <h5 className="card-title">{title}</h5>
                         <h6>Brand {brand} <small className="text-muted">vote ({!vote ? 0 : vote})</small></h6>
@@ -64,6 +70,7 @@ class DetailProduct extends Component {
                         <ColorOptions
                            colors={colors}
                            activeColor={this.state.color}
+                           onChange={this.handleActiveColor}
                         />
 
                         <SpecOptions
