@@ -18,13 +18,9 @@ class DetailProduct extends Component {
          quantity: 1,
          like: false,
          pcs: 1,
-         activeColor: null
+         activeColor: null,
+         activeCapacity: null
       }
-   }
-
-   componentDidUpdate() {
-      const { activeColor } = this.state
-      console.log(activeColor);
    }
 
    changeTab = (e) => {
@@ -43,6 +39,11 @@ class DetailProduct extends Component {
 
    handleActiveColor = (color) => {
       this.setState({ activeColor: color })
+   }
+
+   handleActiveCapacity = (capacity) => {
+      console.log('CAPACITYYYYY:', capacity)
+      this.setState({ activeCapacity: capacity })
    }
 
    render() {
@@ -69,13 +70,14 @@ class DetailProduct extends Component {
 
                         <ColorOptions
                            colors={colors}
-                           activeColor={this.state.color}
+                           activeColor={this.state.activeColor}
                            onChange={this.handleActiveColor}
                         />
 
                         <SpecOptions
                            capacity={capacity}
-                           activeCapacities={this.state.capacities}
+                           activeCapacity={this.state.activeCapacity}
+                           onChange={this.handleActiveCapacity}
                         />
 
                         <Quantity
