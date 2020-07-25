@@ -8,10 +8,10 @@ export default function ColorOptions(props) {
    return (
       <div>
          <h6><small className="text-muted">Choose Color</small></h6>
-         <div className="btn-group btn-group-toggle"
+         {/* <div className="btn-group btn-group-toggle"
             data-toggle="buttons"
             style={{ width: `${1.1 * colors.length}rem` }}
-         >
+         > */}
             {colors.map((color, index) => (
                <label
                   key={index}
@@ -29,7 +29,7 @@ export default function ColorOptions(props) {
                   <i className="fa fa-check text-white"></i>
                </label>
             ))}
-         </div>
+         {/* </div> */}
       </div>
    )
 }

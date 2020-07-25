@@ -1,6 +1,5 @@
 /* Load Product start */
 export const loadProduct = (page = 1) => {
-   console.log('PAGE di load product', page);
    return {
       type: 'LOAD_PRODUCT',
       page
@@ -19,7 +18,6 @@ export const loadProductFail = () => ({
 
 /* Post Product start */
 export const postProduct = ({ title, rate, description, price, brand, detailProduct, category, file, color, stock, size, capacities }, history) => {
-   console.log('action post product, title:', title)
    let fileId = Date.now();
    return {
       type: 'POST_PRODUCT',

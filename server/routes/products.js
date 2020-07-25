@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
   let page = Number(req.header('page')) || 1;
   let limit = Number(req.header('limit')) || 4;
   let offset = (page - 1) * limit;
-  
+
   models.Products.findAndCountAll({
     order: [
       ['createdAt', 'ASC']
@@ -58,8 +58,13 @@ router.post('/', (req, res) => {
         size: size,
         capacities: capacities.split(',')
       })
-        .then(products => {
-          res.json(products)
+        .then(product => {
+          let result = {
+            ...product.dataValues,
+            image: server_URL + product.dataValues.image[0]
+          }
+          console.log('RESULT DI BACKEND >>>', result);
+          res.json(result)
         })
         .catch(err => {
           console.log(err)
@@ -80,7 +85,6 @@ router.get('/:id', (req, res) => {
     }
   })
     .then(product => {
-      console.log(product.dataValues);
       let result = {
         ...product.dataValues,
         image: server_URL + product.dataValues.image[0]

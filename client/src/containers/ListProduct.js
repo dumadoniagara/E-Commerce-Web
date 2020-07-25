@@ -13,11 +13,7 @@ class ListProduct extends Component {
          limit: 4
       }
    }
-
-   componentDidUpdate() {
-      console.log(this.state.page);
-   }
-
+   
    componentDidMount() {
       this.props.loadProduct(this.state.page);
    }
