@@ -81,10 +81,23 @@ function* loadDetails(payload) {
    }
 }
 
+function* addTestimonial(payload) {
+   const { id } = payload
+   try {
+      const data = yield call(detail, `${PATH}/${id}`);
+      yield put(actions.loadDetailsSuccess(data));
+   }
+   catch (error) {
+      yield put(actions.loadDetailsFail());
+   }
+}
+
 export default function* rootSaga() {
    yield all([
       takeEvery('LOAD_PRODUCT', loadProduct),
       takeEvery('POST_PRODUCT', postProduct),
       takeEvery('LOAD_DETAILS', loadDetails),
+      takeEvery('ADD_TESTIMONIAL', addTestimonial)
+
    ]);
 }

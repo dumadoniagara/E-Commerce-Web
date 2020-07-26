@@ -7,6 +7,7 @@ import Testimoni from './MiniDetails/Testimoni';
 import ColorOptions from './MiniDetails/ColorOptions';
 import SpecOptions from './MiniDetails/SpecOptions';
 import Quantity from './MiniDetails/Quantity';
+import BuyModal from './MiniDetails/BuyModal';
 
 class DetailProduct extends Component {
    constructor(props) {
@@ -19,9 +20,11 @@ class DetailProduct extends Component {
          like: false,
          pcs: 1,
          activeColor: null,
-         activeCapacity: null
+         activeCapacity: null,
+         showModal: false
       }
    }
+
 
    changeTab = (e) => {
       e.preventDefault()
@@ -42,14 +45,18 @@ class DetailProduct extends Component {
    }
 
    handleActiveCapacity = (capacity) => {
-      console.log('CAPACITYYYYY:', capacity)
       this.setState({ activeCapacity: capacity })
+   }
+
+   toggleModal = () => {
+      console.log('TEST TOGGLE MODAL')
+      this.setState({ showModal: !this.state.showModal })
    }
 
    render() {
 
       const { isDetailTabActive } = this.state;
-      const { brand, capacities, color, description, stock, detail_product, image, price, rate, testimonials, title, vote } = this.props.detail;
+      const { brand, capacities, color, description, id, category, stock, detail_product, image, price, rate, testimonials, title, vote } = this.props.detail;
       let colors = color || [];
       let capacity = capacities || [];
 
@@ -86,8 +93,7 @@ class DetailProduct extends Component {
                            onDecrement={this.onDecrement}
                            pcs={this.state.pcs}
                         />
-
-                        <button type="button" className="btn btn-outline-info mt-2 btn-block">Buy item <i className="fa fa-cart-arrow-down fa-lg mx-2"></i></button>
+                        <button type="button" onClick={this.toggleModal} className="btn btn-outline-info mt-2 btn-block">Buy item <i className="fa fa-cart-arrow-down fa-lg mx-2"></i></button>
                      </div>
                   </div>
                </div>
@@ -112,6 +118,18 @@ class DetailProduct extends Component {
 
                </div>
             </div>
+
+            {/* Buy Modal triggered by buy button */}
+            <BuyModal
+               title={title}
+               category={category}
+               color={this.state.activeColor}
+               capacity={this.state.activeCapacity}
+               show={this.state.showModal}
+               closeModal={this.toggleModal}
+               itemId={id}
+            />
+
          </div>
       )
    }
