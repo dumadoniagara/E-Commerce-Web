@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import Rater from 'react-rater';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import { addTestimonial } from '../../../actions/index';
-import 'react-rater/lib/react-rater.css'
+import 'react-rater/lib/react-rater.css';
 
 class BuyModal extends Component {
    constructor(props) {
@@ -16,10 +16,6 @@ class BuyModal extends Component {
       };
    }
 
-   componentDidUpdate() {
-      console.log('CURRENT STARS:', this.state)
-   }
-
    handleRatingClick = ({ rating }) => {
       this.setState({ rate: rating });
    }
@@ -27,10 +23,10 @@ class BuyModal extends Component {
    handleSend = e => {
       e.preventDefault();
       let { rate, name, text } = this.state;
-      if (!rate || !name || !text) this.setSate({ isValid: false });
+      if (!rate || !name || !text) this.setState({ isValid: false });
       else {
          this.setState({ isValid: true });
-         this.props.sendTestimonial({ rate, name, text });
+         this.props.addTestimonial({ rate, name, text });
          this.props.closeModal();
       }
    }
@@ -111,6 +107,7 @@ class BuyModal extends Component {
                   type="submit"
                   form="addTestimonial"
                   className="btn btn-primary"
+                  onClick={this.handleSend}
                >
                   Send
                </button>
@@ -129,8 +126,8 @@ class BuyModal extends Component {
    }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-   addTestimonial: (testimoni) => dispatch(addTestimonial(testimoni))
+const mapDispatchToProps = (dispatch, ownProps) => ({
+   addTestimonial: (testimoni) => dispatch(addTestimonial(testimoni, ownProps.id))
 })
 
 export default connect(

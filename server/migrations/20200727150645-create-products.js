@@ -33,7 +33,7 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
       testimonials: {
-        type: Sequelize.JSON
+        type: Sequelize.ARRAY(Sequelize.JSON)
       },
       vote: {
         type: Sequelize.INTEGER

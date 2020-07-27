@@ -31,6 +31,13 @@ const detail = async (path, params) =>
       })
       .catch(err => { throw err })
 
+const postTestimoni = async (path, params) =>
+   await request.put(path, params)
+      .then(response => {
+         return response.data
+      })
+      .catch(err => { throw err })
+
 
 function* loadProduct(payload) {
    const { page } = payload;
@@ -82,13 +89,14 @@ function* loadDetails(payload) {
 }
 
 function* addTestimonial(payload) {
-   const { id } = payload
+   const { id, testimoni } = payload
    try {
-      const data = yield call(detail, `${PATH}/${id}`);
-      yield put(actions.loadDetailsSuccess(data));
+      const data = yield call(postTestimoni, `${PATH}/${id}`, testimoni);
+      console.log(data);
+      yield put(actions.addTestimonialSuccess(data));
    }
    catch (error) {
-      yield put(actions.loadDetailsFail());
+      yield put(actions.addTestimonialFail());
    }
 }
 
@@ -98,6 +106,5 @@ export default function* rootSaga() {
       takeEvery('POST_PRODUCT', postProduct),
       takeEvery('LOAD_DETAILS', loadDetails),
       takeEvery('ADD_TESTIMONIAL', addTestimonial)
-
    ]);
 }

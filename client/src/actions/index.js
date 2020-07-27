@@ -67,7 +67,22 @@ export const resetStateProduct = () => ({
    type: 'RESET_PRODUCT'
 })
 
-export const addTestimonial = (testimoni) => ({
-   type: 'ADD_TESTIMONIAL',
-   testimoni
+export const addTestimonial = (testimoni, id) => {
+   return {
+      type: 'ADD_TESTIMONIAL',
+      testimoni,
+      id
+   }
+}
+
+export const addTestimonialSuccess = (testimoni) => {
+
+   return {
+      type: 'ADD_TESTIMONIAL_SUCCESS',
+      testimoni
+   }
+}
+
+export const addTestimonialFail = () => ({
+   type: 'ADD_TESTIMONIAL_FAIL'
 })

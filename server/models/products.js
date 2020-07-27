@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     brand: DataTypes.STRING,
     detail_product: DataTypes.TEXT,
     image: DataTypes.ARRAY(DataTypes.STRING),
-    testimonials: DataTypes.JSON,
+    testimonials: DataTypes.ARRAY(DataTypes.JSON),
     vote: DataTypes.INTEGER,
     sold: DataTypes.INTEGER,
     color: DataTypes.ARRAY(DataTypes.STRING),

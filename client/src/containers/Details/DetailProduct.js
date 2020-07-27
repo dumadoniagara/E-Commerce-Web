@@ -113,7 +113,7 @@ class DetailProduct extends Component {
                   </div>
 
                   <div className="row p-4">
-                     {isDetailTabActive ? (<ReactMarkdown source={detail_product} />) : (<Testimoni testimoni={brand} />)}
+                     {isDetailTabActive ? (<ReactMarkdown source={detail_product} />) : (<Testimoni testimoni={testimonials} />)}
                   </div>
 
                </div>
@@ -127,7 +127,7 @@ class DetailProduct extends Component {
                capacity={this.state.activeCapacity}
                show={this.state.showModal}
                closeModal={this.toggleModal}
-               itemId={id}
+               id={id}
             />
 
          </div>

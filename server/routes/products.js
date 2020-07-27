@@ -112,14 +112,38 @@ router.delete('/:id', (req, res) => {
     .catch(err => res.json(err))
 })
 
-/* Buy a products */
-router.put('/buy/:id', (req, res) => {
-  const { color, capacity, quantity } = req.body;
+/* edit a products when someone buy it */
+router.put('/:id', (req, res) => {
+  // let {testimonials, rate } = req.body;
+  console.log('BODI BABADOTOT:', req.body)
   models.Products.findOne({
-    where: {
-      id: req.params.id
-    }
+    where: { id: req.params.id }
   })
+    .then(product => {
+      console.log('product', product)
+      if (product.dataValues.testimonials === null) {
+        product.dataValues.testimonials = [];
+      }
+
+      let newTestimonials = [
+        ...product.dataValues.testimonials, req.body
+      ]
+
+      models.Products.update({ testimonials: newTestimonials }, {
+        where: {
+          id: req.params.id
+        }
+      })
+        .then(product => res.json(product))
+        .catch(err => res.json(err))
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({
+        error: true,
+        message: err
+      })
+    })
 })
 
 module.exports = router;

@@ -1,15 +1,28 @@
-import React from 'react'
+import React from 'react';
+import Rater from 'react-rater';
+import 'react-rater/lib/react-rater.css';
 
 export default function Testimoni(props) {
-   console.log('props nya sekarang:', props)
+   const { testimoni } = props
+   console.log('PROPS TESTIMONI:', testimoni);
    return (
       <div>
-         <div className="card">
-            <div className="card-body">
-               This is some text within a card body.
-               ini isi dari testimoni dengan brand {props.testimoni}
-            </div>
-         </div>
-      </div>
+         {[...testimoni].map((item, index) => {
+            return (
+               <div className="row justify-content-between my-3" key={index}>
+                  <div className="col-12 col-sm-6 d-flex align-items-center text-left">
+                     <b>{item.name}</b>
+                  </div>
+                  <div className="col-12 col-sm-6 d-flex  justify-content-end">
+                     <Rater total={5} rating={item.rate} interactive={false} />
+                  </div>
+                  <div className="col-12">
+                     {item.text}
+                  </div>
+               </div>
+
+            )
+         })}
+      </div >
    )
 }
