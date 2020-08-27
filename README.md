@@ -1,5 +1,5 @@
 # E-Commerce-Web
-Simple Web e-commerce to impelement modern javascript's framework.
+Single page Web e-commerce to impelement modern javascript's framework.
 
 Stack technologies:
 
@@ -8,9 +8,11 @@ Back-end :
 - Express.js
 - Postgresql
 - Sequelize-ORM
+- Restful API
 
 Front-end:
 - React.js
 - Redux
 - Redux-saga
+- React-router
  
